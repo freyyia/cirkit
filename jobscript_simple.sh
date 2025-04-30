@@ -3,6 +3,12 @@
 #$ -N learncircuit              
 #$ -cwd                  
 #$ -l h_rt=00:24:00 
+# Request one GPU in the gpu queue:
+#$ -q gpu 
+#$ -l gpu=1
+# Request x GB system RAM 
+# the total system RAM available to the job is the value specified here multiplied by 
+# the number of requested GPUs (above)
 #$ -l h_vmem=10G
 #  These options are:
 #  job name: -N
@@ -16,6 +22,7 @@
 
 # Load Python
 module load python
+module load cuda
 
 # load environment
 source venv/bin/activate

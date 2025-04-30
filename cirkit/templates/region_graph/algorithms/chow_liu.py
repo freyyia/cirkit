@@ -1,14 +1,14 @@
 import numpy as np
 import torch
 from scipy import sparse as sp
-
+from torch import LongTensor, Tensor
 from cirkit.templates.region_graph.algorithms.utils import tree2rg
 from cirkit.templates.region_graph.graph import RegionGraph
 
 
 # pylint: disable-next=invalid-name
 def ChowLiuTree(
-    data: torch.Tensor,
+    data: Tensor,
     input_type: str,
     root: int | None = None,
     chunk_size: int | None = None,
@@ -22,7 +22,7 @@ def ChowLiuTree(
     Details in https://arxiv.org/abs/2409.07953.
 
     Args:
-        data (torch.Tensor): The input data over which running the CLT algorithm,
+        data (Tensor): The input data over which running the CLT algorithm,
             it must be in tabular form (i.e. a matrix).
         input_type (str): The type of the input data, e.g. 'categorical', 'gaussian'.
         root (int | None): The index of the variable desired as root.
@@ -65,12 +65,12 @@ def ChowLiuTree(
 
 
 def _maximum_spanning_tree(
-    adj_matrix: torch.Tensor, root: int | None = None
+    adj_matrix: Tensor, root: int | None = None
 ) -> tuple[np.ndarray, np.ndarray]:
     """Runs the maximum spanning tree of a given adjacency matrix rooted at a given variable.
 
     Args:
-        adj_matrix (torch.Tensor): The adjacency matrix.
+        adj_matrix (Tensor): The adjacency matrix.
         root (int | None): The index of the variable desired as root.
             If None, picks the one that minimizes depth.
 
@@ -92,17 +92,17 @@ def _maximum_spanning_tree(
 
 
 def _categorical_mutual_info(
-    data: torch.LongTensor,
+    data: LongTensor,
     alpha: float = 0.01,
     num_categories: int | None = None,
     chunk_size: int | None = None,
-) -> torch.Tensor:
+) -> Tensor:
     """Computes the mutual information (MI) matrix of a matrix of integers.
 
     Args:
-        data (torch.Tensor): The input data over which computing the MI matrix,
+        data (Tensor): The input data over which computing the MI matrix,
             it must be in tabular form (i.e. a matrix).
-        alpha (torch.Tensor): Laplace smoothing factor.
+        alpha (Tensor): Laplace smoothing factor.
         num_categories (int | None): Specifies the number of categories.
         chunk_size (int | None): Chunked computation, useful in case of large input data.
 

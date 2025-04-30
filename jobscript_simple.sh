@@ -22,4 +22,4 @@ source venv/bin/activate
 
 
 # Run the program
-python ./notebooks/simple-circuit.py
+python ./notebooks/simple_circuit.py

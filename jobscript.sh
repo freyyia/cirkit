@@ -13,8 +13,13 @@
 # Initialise the environment modules
 . /etc/profile.d/modules.sh
 
+
 # Load Python
 module load python
+
+# load environment
+source venv/bin/activate
+
 
 # Run the program
 python ./notebooks/learning-a-circuit-with-pic.py

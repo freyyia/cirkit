@@ -27,6 +27,7 @@ module load cuda
 # load environment
 source venv/bin/activate
 
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 # Run the program
 python ./notebooks/simple_circuit.py
